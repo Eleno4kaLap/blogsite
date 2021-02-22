@@ -25,7 +25,7 @@ SECRET_KEY = '3($9^h)43w#4a9$21y)s@_xg2^tp$s61_(jrg%f*e59=r6duen'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['elenka.pythonanywhere.com',]
 
 
 # Application definition
