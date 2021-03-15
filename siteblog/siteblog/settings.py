@@ -21,14 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # False if not in os.environ
-DEBUG = (os.environ.get("DEBUG", default=False))
+DEBUG = (os.environ.get("DEBUG", default=0))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-
-# ALLOWED_HOSTS = ['elenka.pythonanywhere.com',
-#                  '127.0.0.1',]
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
