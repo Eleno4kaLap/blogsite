@@ -4,3 +4,4 @@ siteblog/static
 
 .idea
 
+siteblog/django_cache
