@@ -13,6 +13,7 @@ class PostAdminForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     form = PostAdminForm
@@ -32,19 +33,21 @@ class PostAdmin(admin.ModelAdmin):
     get_photo.short_description = 'Photo'
 
 
-
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_display = ('id', 'title', 'slug')
     list_display_links = ('id', 'title',)
 
 
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_display = ('id', 'title', 'slug')
     list_display_links = ('id', 'title',)
 
 
+@admin.register(MainSlider)
 class MainSliderAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'get_photo')
     list_display_links = ('id', 'title',)
@@ -56,8 +59,7 @@ class MainSliderAdmin(admin.ModelAdmin):
             return mark_safe(f'<img src="{odj.photo.url}" width=50>')
         return '-'
 
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Tag, TagAdmin)
-admin.site.register(Post, PostAdmin)
-admin.site.register(MainSlider, MainSliderAdmin)
+@admin.register(EmailSubscriptions)
+class EmailSubscriptionsAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_at',)
+    save_on_top = True

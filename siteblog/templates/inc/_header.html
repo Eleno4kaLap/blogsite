@@ -2,6 +2,19 @@
 <header class="header">
             <div class="container">
                 <div class="row">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
 
                     <div class="col-md-2">
                         <div class="logo">
@@ -10,6 +23,7 @@
                     </div>
                     <div class="col-md-10">
                         {% show_menu %}
+
 
                     </div>
                 </div>

@@ -110,6 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 .env.prod
+.env.local
 
 # Spyder project settings
 .spyderproject
@@ -129,6 +130,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# celery
+siteblog/celerybeat-schedule.db
+siteblog/celerybeat-schedule
+siteblog/celerybeat.pid
 
 
 siteblog/static

@@ -87,7 +87,7 @@
 .wrapper section.bg-text-area .bg-text {
     background-image: url(img/bg-iamges.jpg);
     background-size: 100% 100%;
-    padding: 205px 280px;
+    padding: 205px 110px;
 }
 
 .wrapper section.bg-text-area .container {}
@@ -95,7 +95,7 @@
 .wrapper section.bg-text-area .bg-text h3 {
     color: #fff;
     font-family: Geometria;
-    font-size: 50px;
+    font-size: 25px;
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;

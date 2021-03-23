@@ -1,0 +1,1 @@
+favqs_quote_url = 'https://favqs.com/api/qotd'

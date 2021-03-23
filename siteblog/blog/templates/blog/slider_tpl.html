@@ -1,10 +1,8 @@
-{% for s in slider %}
-{% if s.photo %}
-<div class="bg-text" style="background-image: url({{ s.photo.url }})">
+{% if slider.photo %}
+<div class="bg-text" style="background-image: url({{ slider.photo.url }})">
     {% else %}
     <div class="bg-text">
-        {% endif %}
-        <h3>{{ s.title }}</h3>
-        <p>{{ s.content }}</p>
+    {% endif %}
+        <h3>{{ slider.title }}</h3>
+        <p>{{ slider.content }}</p>
     </div>
-    {% endfor %}

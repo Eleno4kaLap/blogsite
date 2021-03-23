@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]
+if [ "$DOCKER" = 1 ]
 then
     echo "Waiting for postgres..."
 

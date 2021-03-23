@@ -15,6 +15,10 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if not 'SECRET_KEY' in os.environ:
+    from dotenv import load_dotenv
+
+    load_dotenv(dotenv_path=os.path.join(Path(__file__).resolve().parent.parent.parent, '.env.local'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -27,7 +31,6 @@ DEBUG = (os.environ.get("DEBUG", default=0))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'testapp.apps.TestappConfig',
     'mptt',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'siteblog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -102,7 +105,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -121,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -134,7 +135,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -151,6 +151,23 @@ MEDIA_URL = '/media/'
 INTERNAL_IPS = [
     '127.0.0.1'
 ]
+
+#email
+EMAIL_BACKEND ="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "django.my.email@gmail.com"
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+#celery
+REDIS_HOST = os.environ.get('REDIS_HOST', '0.0.0.0')
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_TASK_ANNOTATIONS = {'tasks.add': {'rate_limit': '1/s'}}
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_ACCEPT_CONTENT = ['application/json']
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -201,7 +218,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
             # your extra plugins here
             'div',
             'autolink',
@@ -227,4 +244,3 @@ CACHES = {
 }
 
 MPTT_ADMIN_LEVEL_INDENT = 20
-

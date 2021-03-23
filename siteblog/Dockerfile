@@ -25,11 +25,5 @@ RUN pip install -r requirements.txt
 # Remove dependencies
 RUN apk del .build-deps
 
-# copy entrypoint.sh
-COPY ./entrypoint.sh .
-
 # copy project
 COPY . .
-
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/siteblog/entrypoint.sh"]
